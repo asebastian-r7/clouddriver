@@ -20,6 +20,7 @@ import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.AWSCredentialsProvider;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.netflix.spinnaker.clouddriver.consul.config.ConsulConfig;
 import com.netflix.spinnaker.clouddriver.security.AccountCredentials;
 import com.netflix.spinnaker.fiat.model.resources.Permissions;
 
@@ -52,6 +53,7 @@ public class AmazonCredentials implements AccountCredentials<AWSCredentials> {
     private final List<String> defaultSecurityGroups;
     private final List<LifecycleHook> lifecycleHooks;
     private final boolean allowPrivateThirdPartyImages;
+    private final ConsulConfig consulConfig;
     private final AWSCredentialsProvider credentialsProvider;
 
     public static AmazonCredentials fromAWSCredentials(String name,
@@ -89,6 +91,7 @@ public class AmazonCredentials implements AccountCredentials<AWSCredentials> {
                                    null,
                                    null,
                                    false,
+                                   null,
                                    credentialsProvider);
     }
 
@@ -102,7 +105,8 @@ public class AmazonCredentials implements AccountCredentials<AWSCredentials> {
                              @JsonProperty("requiredGroupMembership") List<String> requiredGroupMembership,
                              @JsonProperty("permissions") Permissions permissions,
                              @JsonProperty("lifecycleHooks") List<LifecycleHook> lifecycleHooks,
-                             @JsonProperty("allowPrivateThirdPartyImages") Boolean allowPrivateThirdPartyImages) {
+                             @JsonProperty("allowPrivateThirdPartyImages") Boolean allowPrivateThirdPartyImages,
+                             @JsonProperty("consul") ConsulConfig consulConfig) {
         this(name,
              environment,
              accountType,
@@ -114,6 +118,7 @@ public class AmazonCredentials implements AccountCredentials<AWSCredentials> {
              permissions,
              lifecycleHooks,
              allowPrivateThirdPartyImages,
+             consulConfig,
              null);
     }
 
@@ -130,6 +135,7 @@ public class AmazonCredentials implements AccountCredentials<AWSCredentials> {
             source.getPermissions(),
             source.getLifecycleHooks(),
             source.getAllowPrivateThirdPartyImages(),
+            source.getConsulConfig(),
             credentialsProvider
         );
     }
@@ -145,6 +151,7 @@ public class AmazonCredentials implements AccountCredentials<AWSCredentials> {
                       Permissions permissions,
                       List<LifecycleHook> lifecycleHooks,
                       boolean allowPrivateThirdPartyImages,
+                      ConsulConfig consulConfig,
                       AWSCredentialsProvider credentialsProvider) {
         this.name = requireNonNull(name, "name");
         this.environment = requireNonNull(environment, "environment");
@@ -157,6 +164,7 @@ public class AmazonCredentials implements AccountCredentials<AWSCredentials> {
         this.permissions = permissions == null ? Permissions.EMPTY : permissions;
         this.lifecycleHooks = lifecycleHooks == null ? Collections.<LifecycleHook>emptyList() : Collections.unmodifiableList(lifecycleHooks);
         this.allowPrivateThirdPartyImages = allowPrivateThirdPartyImages;
+        this.consulConfig = consulConfig;
         this.credentialsProvider = credentialsProvider;
     }
 
@@ -198,6 +206,10 @@ public class AmazonCredentials implements AccountCredentials<AWSCredentials> {
 
     public boolean getAllowPrivateThirdPartyImages() {
       return allowPrivateThirdPartyImages;
+    }
+
+    public ConsulConfig getConsulConfig() {
+      return this.consulConfig;
     }
 
     @JsonIgnore

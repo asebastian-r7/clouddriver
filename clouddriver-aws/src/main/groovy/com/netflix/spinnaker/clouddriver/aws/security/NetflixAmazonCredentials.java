@@ -18,6 +18,7 @@ package com.netflix.spinnaker.clouddriver.aws.security;
 
 import com.amazonaws.auth.AWSCredentialsProvider;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.netflix.spinnaker.clouddriver.consul.config.ConsulConfig;
 import com.netflix.spinnaker.fiat.model.resources.Permissions;
 
 import java.util.List;
@@ -47,6 +48,7 @@ public class NetflixAmazonCredentials extends AmazonCredentials {
                                     @JsonProperty("permissions") Permissions permissions,
                                     @JsonProperty("lifecycleHooks") List<LifecycleHook> lifecycleHooks,
                                     @JsonProperty("allowPrivateThirdPartyImages") boolean allowPrivateThirdPartyImages,
+                                    @JsonProperty("consul") ConsulConfig consulConfig,
                                     @JsonProperty("edda") String edda,
                                     @JsonProperty("eddaEnabled") Boolean eddaEnabled,
                                     @JsonProperty("discovery") String discovery,
@@ -67,6 +69,7 @@ public class NetflixAmazonCredentials extends AmazonCredentials {
              permissions,
              lifecycleHooks,
              allowPrivateThirdPartyImages,
+             consulConfig,
              null,
              edda,
              eddaEnabled,
@@ -95,6 +98,7 @@ public class NetflixAmazonCredentials extends AmazonCredentials {
              copy.getPermissions(),
              copy.getLifecycleHooks(),
              copy.getAllowPrivateThirdPartyImages(),
+             copy.getConsulConfig(),
              credentialsProvider,
              copy.getEdda(),
              copy.getEddaEnabled(),
@@ -118,6 +122,7 @@ public class NetflixAmazonCredentials extends AmazonCredentials {
                              Permissions permissions,
                              List<LifecycleHook> lifecycleHooks,
                              boolean allowPrivateThirdPartyImages,
+                             ConsulConfig consulConfig,
                              AWSCredentialsProvider credentialsProvider,
                              String edda,
                              Boolean eddaEnabled,
@@ -139,6 +144,7 @@ public class NetflixAmazonCredentials extends AmazonCredentials {
               permissions,
               lifecycleHooks,
               allowPrivateThirdPartyImages,
+              consulConfig,
               credentialsProvider);
         this.edda = edda;
         this.eddaEnabled = flagValue(edda, eddaEnabled);

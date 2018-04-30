@@ -17,6 +17,7 @@
 package com.netflix.spinnaker.clouddriver.aws.security;
 
 import com.amazonaws.auth.AWSCredentialsProvider;
+import com.netflix.spinnaker.clouddriver.consul.config.ConsulConfig;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.netflix.spinnaker.fiat.model.resources.Permissions;
 
@@ -62,6 +63,7 @@ public class AssumeRoleAmazonCredentials extends AmazonCredentials {
                                        @JsonProperty("permissions") Permissions permissions,
                                        @JsonProperty("lifecycleHooks") List<LifecycleHook> lifecycleHooks,
                                        @JsonProperty("allowPrivateThirdPartyImages") boolean allowPrivateThirdPartyImages,
+                                       @JsonProperty("consul") ConsulConfig consulConfig,
                                        @JsonProperty("assumeRole") String assumeRole,
                                        @JsonProperty("sessionName") String sessionName) {
         this(name,
@@ -75,6 +77,7 @@ public class AssumeRoleAmazonCredentials extends AmazonCredentials {
              permissions,
              lifecycleHooks,
              allowPrivateThirdPartyImages,
+             consulConfig,
              null,
              assumeRole,
              sessionName);
@@ -92,6 +95,7 @@ public class AssumeRoleAmazonCredentials extends AmazonCredentials {
              copy.getPermissions(),
              copy.getLifecycleHooks(),
              copy.getAllowPrivateThirdPartyImages(),
+             copy.getConsulConfig(),
              credentialsProvider,
              copy.getAssumeRole(),
              copy.getSessionName());
@@ -108,6 +112,7 @@ public class AssumeRoleAmazonCredentials extends AmazonCredentials {
                                 Permissions permissions,
                                 List<LifecycleHook> lifecycleHooks,
                                 boolean allowPrivateThirdPartyImages,
+                                ConsulConfig consulConfig,
                                 AWSCredentialsProvider credentialsProvider,
                                 String assumeRole,
                                 String sessionName) {
@@ -122,6 +127,7 @@ public class AssumeRoleAmazonCredentials extends AmazonCredentials {
               permissions,
               lifecycleHooks,
               allowPrivateThirdPartyImages,
+              consulConfig,
               createSTSCredentialsProvider(credentialsProvider,
                                            accountId,
                                            assumeRole,

@@ -16,6 +16,7 @@
 
 package com.netflix.spinnaker.clouddriver.aws.security.config;
 
+import com.netflix.spinnaker.clouddriver.consul.config.ConsulConfig;
 import com.netflix.spinnaker.fiat.model.resources.Permissions;
 
 import java.util.List;
@@ -153,6 +154,7 @@ public class CredentialsConfig {
         private String sessionName;
         private List<LifecycleHook> lifecycleHooks;
         private boolean allowPrivateThirdPartyImages;
+        private ConsulConfig consulConfig;
 
         public String getName() {
             return name;
@@ -321,6 +323,10 @@ public class CredentialsConfig {
         public void setAllowPrivateThirdPartyImages(Boolean allowPrivateThirdPartyImages) {
           this.allowPrivateThirdPartyImages = allowPrivateThirdPartyImages;
         }
+
+        public ConsulConfig getConsulConfig(ConsulConfig consulConfig) { return consulConfig; }
+
+        public void setConsulConfig() { this.consulConfig = consulConfig; }
     }
 
     private String defaultKeyPairTemplate;
