@@ -324,7 +324,7 @@ public class CredentialsConfig {
           this.allowPrivateThirdPartyImages = allowPrivateThirdPartyImages;
         }
 
-        public ConsulConfig getConsulConfig(ConsulConfig consulConfig) { return consulConfig; }
+        public ConsulConfig getConsulConfig() { return consulConfig; }
 
         public void setConsulConfig(ConsulConfig consulConfig) { this.consulConfig = consulConfig; }
     }
