@@ -326,7 +326,7 @@ public class CredentialsConfig {
 
         public ConsulConfig getConsulConfig(ConsulConfig consulConfig) { return consulConfig; }
 
-        public void setConsulConfig() { this.consulConfig = consulConfig; }
+        public void setConsulConfig(ConsulConfig consulConfig) { this.consulConfig = consulConfig; }
     }
 
     private String defaultKeyPairTemplate;
