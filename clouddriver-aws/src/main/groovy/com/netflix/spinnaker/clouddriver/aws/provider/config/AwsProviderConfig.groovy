@@ -50,6 +50,8 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.DependsOn
 import org.springframework.context.annotation.Scope
+import org.slf4j.Logger // TODO: remove
+import org.slf4j.LoggerFactory // TODO: remove
 
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.ExecutorService
@@ -58,6 +60,8 @@ import java.util.concurrent.Executors
 @Configuration
 @EnableConfigurationProperties(ReservationReportConfigurationProperties)
 class AwsProviderConfig {
+  final Logger log = LoggerFactory.getLogger(getClass()) // TODO: remove
+
   @Bean
   @DependsOn('netflixAmazonCredentials')
   AwsProvider awsProvider(AmazonCloudProvider amazonCloudProvider,
@@ -145,7 +149,9 @@ class AwsProviderConfig {
           newlyAddedAgents << new AmazonApplicationLoadBalancerCachingAgent(amazonCloudProvider, amazonClientProvider, credentials, region.name, eddaApiFactory.createApi(credentials.edda, region.name), objectMapper, registry, eddaTimeoutConfig)
           newlyAddedAgents << new ReservedInstancesCachingAgent(amazonClientProvider, credentials, region.name, objectMapper, registry)
           newlyAddedAgents << new AmazonCertificateCachingAgent(amazonClientProvider, credentials, region.name, objectMapper, registry)
+          log.info("Consul code is running.")
           if (credentials.consulConfig?.enabled) {
+            log.info("Consul is enabled, adding agent.")
             newlyAddedAgents << new AmazonConsulCachingAgent(amazonClientProvider, credentials, region.name, objectMapper, ctx)
           }
           if (credentials.eddaEnabled && !eddaTimeoutConfig.disabledRegions.contains(region.name)) {
