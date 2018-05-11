@@ -87,8 +87,9 @@ class AmazonConsulCachingAgent implements CachingAgent, AccountAware {
         resp.reservations.each { server ->
           ConsulNode consulNode = null
           try{
+            log.info("Getting health from ${server.instances.instanceId.toString()}")
             consulNode = ConsulProviderUtils.getHealths(account.consulConfig, server.instances.instanceId.toString())
-            log.info("Getting health from consulNode: ${consulNode}")
+            log.info("getHealths returned this consulNode: ${consulNode}")
           } catch (RetrofitError e) {
             log.warn(e.message)
           }
