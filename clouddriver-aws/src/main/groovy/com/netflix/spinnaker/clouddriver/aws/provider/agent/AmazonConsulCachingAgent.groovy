@@ -83,7 +83,7 @@ class AmazonConsulCachingAgent implements CachingAgent, AccountAware {
     List<Instance> awsInstances = []
     while (true) {
       def resp = amazonEC2.describeInstances(request)
-      // TODO: if (account?.consulConfig?.enabled) {
+      if (account.consulConfig.enabled) {
         resp.reservations.each { server ->
           ConsulNode consulNode = null
           try{
@@ -94,7 +94,7 @@ class AmazonConsulCachingAgent implements CachingAgent, AccountAware {
             log.warn(e.message)
           }
         }
-      // }
+      }
       // awsInstances.addAll(resp.reservations.collectMany { it.instances })
       if (resp.nextToken) {
         request.withNextToken(resp.nextToken)
