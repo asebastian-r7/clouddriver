@@ -150,6 +150,10 @@ class AwsProviderConfig {
           newlyAddedAgents << new ReservedInstancesCachingAgent(amazonClientProvider, credentials, region.name, objectMapper, registry)
           newlyAddedAgents << new AmazonCertificateCachingAgent(amazonClientProvider, credentials, region.name, objectMapper, registry)
           log.info("Consul code is running.")
+          log.info("Consul credentials: ${credentials}")
+          log.info("ConsulConfig: ${credentials.consulConfig}")
+          log.info("consulConfig?: ${credentials.consulConfig?}")
+          log.info("consulConfig?.enabled: ${credentials.consulConfig?.enabled}")
           if (credentials.consulConfig?.enabled) {
             log.info("Consul is enabled, adding agent.")
             newlyAddedAgents << new AmazonConsulCachingAgent(amazonClientProvider, credentials, region.name, objectMapper, ctx)
