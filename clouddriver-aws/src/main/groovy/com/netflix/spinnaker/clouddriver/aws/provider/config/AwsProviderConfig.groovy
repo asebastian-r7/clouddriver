@@ -152,7 +152,6 @@ class AwsProviderConfig {
           log.info("Consul code is running.")
           log.info("Consul credentials: ${credentials}")
           log.info("ConsulConfig: ${credentials.consulConfig}")
-          log.info("consulConfig?: ${credentials.consulConfig?}")
           log.info("consulConfig?.enabled: ${credentials.consulConfig?.enabled}")
           if (credentials.consulConfig?.enabled) {
             log.info("Consul is enabled, adding agent.")
