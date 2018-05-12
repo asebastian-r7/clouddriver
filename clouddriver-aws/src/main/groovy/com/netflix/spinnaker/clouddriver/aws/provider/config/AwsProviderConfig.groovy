@@ -153,7 +153,7 @@ class AwsProviderConfig {
           log.info("Consul credentials: ${credentials}")
           log.info("ConsulConfig: ${credentials.consulConfig}")
           log.info("consulConfig?.enabled: ${credentials.consulConfig?.enabled}")
-          if (credentials.consulConfig.enabled) {
+          if (credentials.consulConfig?.enabled) {
             log.info("Consul is enabled, adding agent.")
             newlyAddedAgents << new AmazonConsulCachingAgent(amazonClientProvider, credentials, region.name, objectMapper, ctx)
           }
