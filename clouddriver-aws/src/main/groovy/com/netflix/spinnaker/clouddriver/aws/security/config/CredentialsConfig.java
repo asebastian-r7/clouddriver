@@ -345,6 +345,7 @@ public class CredentialsConfig {
     private String defaultSessionName;
     private String defaultLifecycleHookRoleARNTemplate;
     private String defaultLifecycleHookNotificationTargetARNTemplate;
+    private ConsulConfig defaultConsulConfig;
 
     private List<Account> accounts;
 
@@ -450,5 +451,9 @@ public class CredentialsConfig {
 
     public void setDefaultLifecycleHookNotificationTargetARNTemplate(String defaultLifecycleHookNotificationTargetARNTemplate) {
         this.defaultLifecycleHookNotificationTargetARNTemplate = defaultLifecycleHookNotificationTargetARNTemplate;
+    }
+
+    public ConsulConfig getDefaultConsulConfig() {
+      return defaultConsulConfig;
     }
 }

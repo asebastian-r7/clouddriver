@@ -219,7 +219,7 @@ public class CredentialsLoader<T extends AmazonCredentials> {
             account.setRegions(initRegions(defaultRegions, account.getRegions()));
             account.setDefaultSecurityGroups(account.getDefaultSecurityGroups() != null ? account.getDefaultSecurityGroups() : config.getDefaultSecurityGroups());
             account.setLifecycleHooks(account.getLifecycleHooks() != null ? account.getLifecycleHooks() : config.getDefaultLifecycleHooks());
-            account.setConsulConfig(account.getConsulConfig());
+            account.setConsulConfig(account.getConsulConfig() != null ? account.getConsulConfig() : config.getDefaultConsulConfig());
 
             Map<String, String> templateContext = new HashMap<>(templateValues);
             templateContext.put("name", account.getName());
