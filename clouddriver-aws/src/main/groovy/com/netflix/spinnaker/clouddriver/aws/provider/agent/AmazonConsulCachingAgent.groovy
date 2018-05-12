@@ -9,7 +9,6 @@ import com.netflix.spinnaker.cats.agent.AgentDataType
 import com.netflix.spinnaker.cats.agent.CacheResult
 import com.netflix.spinnaker.cats.agent.CachingAgent
 import com.netflix.spinnaker.cats.agent.DefaultCacheResult
-import com.netflix.spinnaker.cats.cache.Cache
 import com.netflix.spinnaker.cats.cache.CacheData
 import com.netflix.spinnaker.cats.provider.ProviderCache
 import com.netflix.spinnaker.clouddriver.aws.provider.AwsProvider
@@ -39,8 +38,6 @@ class AmazonConsulCachingAgent implements CachingAgent, AccountAware {
   final String region
   final ObjectMapper objectMapper
   final ApplicationContext ctx
-
-  private Cache cacheView
 
   AmazonConsulCachingAgent(AmazonClientProvider amazonClientProvider,
                            NetflixAmazonCredentials account, String region,
