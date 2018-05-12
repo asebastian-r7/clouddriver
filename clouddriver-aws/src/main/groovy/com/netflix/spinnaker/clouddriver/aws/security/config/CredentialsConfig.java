@@ -453,6 +453,8 @@ public class CredentialsConfig {
         this.defaultLifecycleHookNotificationTargetARNTemplate = defaultLifecycleHookNotificationTargetARNTemplate;
     }
 
+    public void setDefaultConsulConfig(ConsulConfig defaultConsulConfig) { this.defaultConsulConfig = defaultConsulConfig; }
+
     public ConsulConfig getDefaultConsulConfig() {
       return defaultConsulConfig;
     }
