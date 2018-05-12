@@ -307,7 +307,6 @@ public class CredentialsConfig {
         public void setSessionName(String sessionName) {
             this.sessionName = sessionName;
         }
-
         public List<LifecycleHook> getLifecycleHooks() {
           return lifecycleHooks;
         }
@@ -327,7 +326,9 @@ public class CredentialsConfig {
         public ConsulConfig getConsulConfig() { return consulConfig; }
 
         public void setConsulConfig(ConsulConfig consulConfig) {
-          consulConfig.applyDefaults();
+          if (consulConfig.isEnabled()) {
+            consulConfig.applyDefaults();
+          }
           this.consulConfig = consulConfig;
         }
     }
