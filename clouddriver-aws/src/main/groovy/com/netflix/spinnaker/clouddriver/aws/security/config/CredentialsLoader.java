@@ -220,7 +220,9 @@ public class CredentialsLoader<T extends AmazonCredentials> {
             account.setDefaultSecurityGroups(account.getDefaultSecurityGroups() != null ? account.getDefaultSecurityGroups() : config.getDefaultSecurityGroups());
             account.setLifecycleHooks(account.getLifecycleHooks() != null ? account.getLifecycleHooks() : config.getDefaultLifecycleHooks());
             account.setConsulConfig(account.getConsulConfig() != null ? account.getConsulConfig() : config.getDefaultConsulConfig());
-            throw new IllegalArgumentException(account.getConsulConfig().toString());
+            if (true) {
+              throw new IllegalArgumentException(account.getConsulConfig().toString());
+            }
 
             Map<String, String> templateContext = new HashMap<>(templateValues);
             templateContext.put("name", account.getName());
